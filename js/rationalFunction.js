@@ -1,5 +1,7 @@
 class RationalFunction extends MFunction {
     constructor(P, Q) {
+        if(P.constructor.name == "Monomial") P = Polynomial.of([P]);
+        if(Q.constructor.name == "Monomial") Q = Polynomial.of([Q]);
         super();
         this.P = P;
         this.Q = Q;
