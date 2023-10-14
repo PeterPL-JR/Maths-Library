@@ -1,4 +1,4 @@
-class Polynomial extends Function {
+class Polynomial extends MFunction {
     constructor(... coefficients) {
         super();
         this.coefficients = coefficients;

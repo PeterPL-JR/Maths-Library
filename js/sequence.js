@@ -1,4 +1,4 @@
-class Sequence extends Function {
+class Sequence extends MFunction {
     constructor(formula) {
         super(formula);
     }

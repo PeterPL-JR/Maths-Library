@@ -1,4 +1,4 @@
-class RationalFunction extends Function {
+class RationalFunction extends MFunction {
     constructor(P, Q) {
         super();
         this.P = P;

@@ -1,4 +1,4 @@
-class Function {
+class MFunction {
     constructor(formula) {
         if(formula) this.formula = formula;
     }
