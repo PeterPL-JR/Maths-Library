@@ -15,6 +15,6 @@ class Rectangle extends Parallelogram {
     }
 
     diagonal() {
-        return Math.sqrt(this.a()*this.a() + this.b()*this.b());
+        return PythagorasTheorem.c(this.a(), this.b());
     }
 }
