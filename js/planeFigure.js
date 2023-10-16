@@ -1,0 +1,7 @@
+class PlaneFigure {
+    perimeter() {
+    }
+
+    area() {
+    }
+}
