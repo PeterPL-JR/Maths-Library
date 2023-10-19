@@ -1,4 +1,4 @@
-class QuadraticFunction extends Polynomial {
+class QuadraticFunction extends PolynomialFunction {
     constructor(a, b=0, c=0) {
         if(!a) throw new Error("'a' cannot be 0!");
         super([a, b, c]);

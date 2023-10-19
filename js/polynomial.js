@@ -1,62 +1,68 @@
-class Polynomial extends MFunction {
-    constructor(coefficients) {
-        super();
-        this.elements = [];
-        
-        let degree = coefficients.length - 1;
-        for(let coefficient of coefficients) {
-            this.elements.push(new Monomial(coefficient, degree));
-            degree--;
-        }
+class Polynomial {
+    constructor(elements) {
+        this.elements = Polynomial.reduce(elements);
     }
 
-    formula(x) {
-        let y = 0;
-        for(let i = this.degree(); i >= 0; i--) {
-            y += this.elements[i].coefficient * Math.pow(x, this.elements[i].degree);
-        }
-        return y;
-    }
-
-    isInDomain(x) {
-        return true;
-    }
-
-    // TODO
-    getZero() {
-    }
-
-    degree() {
-        return this.elements.length - 1;
-    }
-
-    // TODO
     static sum(p1, p2) {
+        return new Polynomial([...p1.elements, ...p2.elements]);
     }
 
-    // TODO
     static difference(p1, p2) {
+        p2 = p2.copy();
+        for(let i = 0; i < p2.elements.length; i++) {
+            let m = p2.elements[i];
+            p2.elements[i] = new Monomial(-m.coefficient, m.variables);
+        }
+        return Polynomial.sum(p1, p2);
     }
 
-    // TODO
     static multiply(p1, p2) {
+        let elements = [];
+        for(let m1 of p1.elements) {
+            for(let m2 of p2.elements) {
+                elements.push(Monomial.multiply(m1, m2));
+            }
+        }
+        return new Polynomial(elements);
     }
 
     // TODO
     static divide(p1, p2) {
     }
 
-    static of(monomials) {
-        let elements = Array.from(monomials);
-        elements.sort((e1, e2) => e2.degree - e1.degree);
-        
-        let degree = elements[0].degree;
-        let coefficients = [];
+    degree() {
+        let degrees = [];
 
-        for(let i = degree; i >= 0; i--) {
-            let monomial = elements.find((elem) => elem.degree == i);            
-            coefficients.push(monomial ? monomial.coefficient : 0);
+        for(let m of this.elements) {
+            degrees.push(m.degree());
         }
-        return new Polynomial(coefficients);
+        return Math.max(...degrees);
+    }
+
+    static reduce(elements) {
+        let reduced = [];
+        for(let m of elements) {
+            let index = reduced.findIndex((e) => Monomial.isSimilar(e, m));
+            if(index == -1) {
+                reduced.push(m);
+                continue;
+            }
+            reduced[index] = Monomial.sum(reduced[index], m);
+        }
+        return Polynomial.sort(reduced.filter((e) => e.coefficient != 0));
+    }
+
+    static sort(elements) {
+        let sorted = Array.from(elements);
+        sorted.sort((e1, e2) => e2.degree() - e1.degree());
+        return sorted;
+    }
+
+    copy() {
+        let elements = [];
+        for(let elem of this.elements) {
+            elements.push(elem.copy());
+        }
+        return new Polynomial(elements);
     }
 }
