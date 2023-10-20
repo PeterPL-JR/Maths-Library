@@ -28,6 +28,7 @@ class Polynomial {
     }
 
     static multiply(p1, p2) {
+        if(typeof p2 == "number") p2 = new Polynomial([p2]);
         let elements = [];
         for(let m1 of p1.elements) {
             for(let m2 of p2.elements) {
@@ -61,6 +62,7 @@ class Polynomial {
     static reduce(elements) {
         let reduced = [];
         for(let m of elements) {
+            if(typeof m == "number") m = new Monomial(m);
             let index = reduced.findIndex((e) => Monomial.isSimilar(e, m));
             if(index == -1) {
                 reduced.push(m);

@@ -25,6 +25,7 @@ class Monomial {
     }
 
     static multiply(m1, m2) {
+        if(typeof m2 == "number") m2 = new Monomial(m2);
         return new Monomial(m1.coefficient * m2.coefficient, [...m1.variables, ...m2.variables]);
     }
 
