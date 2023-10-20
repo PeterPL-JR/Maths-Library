@@ -1,14 +1,12 @@
 class RationalFunction extends MFunction {
-    constructor(P, Q) {
-        if(P.constructor.name == "Monomial") P = Polynomial.of([P]);
-        if(Q.constructor.name == "Monomial") Q = Polynomial.of([Q]);
+    constructor(coefficientsP, coefficientsQ) {
         super();
-        this.P = P;
-        this.Q = Q;
+        this.P = new PolynomialFunction(coefficientsP);
+        this.Q = new PolynomialFunction(coefficientsQ);
     }
 
     formula(x) {
-        return this.P.get(x) / this.Q.get(x);
+        return new RationalExpression(this.P.polynomial, this.Q.polynomial).get({x});
     }
 
     isInDomain(x) {
