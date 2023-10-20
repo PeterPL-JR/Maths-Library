@@ -4,6 +4,17 @@ class Monomial {
         this.variables = Monomial.reduce(variables);
     }
 
+    get(values) {
+        let result = this.coefficient;
+        for(let v of this.variables) {
+            if(Object.keys(values).indexOf(v.letter) == -1) return;
+
+            let value = values[v.letter];
+            result *= Math.pow(value, v.degree);
+        }
+        return result;
+    }
+
     static sum(m1, m2) {
         if(Monomial.isSimilar(m1, m2)) return new Monomial(m1.coefficient + m2.coefficient, m1.variables);
         else return new Polynomial([m1, m2]);

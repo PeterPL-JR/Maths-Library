@@ -13,11 +13,7 @@ class PolynomialFunction extends MFunction {
     }
 
     formula(x) {
-        let y = 0;
-        for(let elem of this.polynomial.elements) {
-            y += elem.coefficient * Math.pow(x, elem.degree());
-        }
-        return y;
+        return this.polynomial.get({x});
     }
 
     isInDomain(x) {

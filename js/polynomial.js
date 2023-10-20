@@ -3,6 +3,17 @@ class Polynomial {
         this.elements = Polynomial.reduce(elements);
     }
 
+    get(values) {
+        let result = 0;
+        for(let elem of this.elements) {
+            let value = elem.get(values);
+            if(!isFinite(value)) return;
+
+            result += value;
+        }
+        return result;
+    }
+
     static sum(p1, p2) {
         return new Polynomial([...p1.elements, ...p2.elements]);
     }
@@ -37,6 +48,14 @@ class Polynomial {
             degrees.push(m.degree());
         }
         return Math.max(...degrees);
+    }
+
+    coefficients() {
+        let coefficients = [];
+        for(let m of this.elements) {
+            coefficients.push(m.coefficient);
+        }
+        return coefficients;
     }
 
     static reduce(elements) {
