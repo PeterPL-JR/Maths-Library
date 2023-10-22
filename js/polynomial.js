@@ -38,8 +38,19 @@ class Polynomial {
         return new Polynomial(elements);
     }
 
-    // TODO
     static divide(p1, p2) {
+        if(typeof p2 == "number") p2 = new Polynomial([p2]);
+        let divided = [];
+        let rest = p1;
+
+        while(rest.degree() >= p2.degree()) {
+            let result = Monomial.divide(rest.elements[0], p2.elements[0]);
+            if(!result) return;
+
+            rest = Polynomial.difference(rest, Polynomial.multiply(p2, new Polynomial([result])));
+            divided.push(result);
+        }
+        return new Polynomial(divided);
     }
 
     degree() {

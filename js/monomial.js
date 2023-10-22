@@ -29,8 +29,20 @@ class Monomial {
         return new Monomial(m1.coefficient * m2.coefficient, [...m1.variables, ...m2.variables]);
     }
 
-    // TODO
     static divide(m1, m2) {
+        if(typeof m2 == "number") m2 = new Monomial(m2);
+        let divided = m1.copy().variables;
+
+        for(let factor of m2.variables) {
+            let index = divided.findIndex((e) => e.letter == factor.letter);
+            if(index == -1) return;
+            
+            let resultDegree = divided[index].degree - factor.degree;
+            if(resultDegree < 0) return;
+
+            divided[index] = new Variable(divided[index].letter, resultDegree);
+        }
+        return new Monomial(m1.coefficient / m2.coefficient, divided);
     }
 
     degree() {
