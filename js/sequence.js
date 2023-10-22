@@ -7,11 +7,7 @@ class Sequence extends MFunction {
     }
 
     sum(n) {
-        let sum = 0;
-        for(let i = 1; i <= n; i++) {
-            sum += this.get(n);
-        }
-        return sum;
+        return new Sum(this, 1, n).get();
     }
 
     isInDomain(n) {
