@@ -50,7 +50,9 @@ class Polynomial {
             rest = Polynomial.difference(rest, Polynomial.multiply(p2, new Polynomial([result])));
             divided.push(result);
         }
-        return new Polynomial(divided);
+        if(rest.isZero()) {
+            return new Polynomial(divided);
+        }
     }
 
     degree() {
@@ -68,6 +70,10 @@ class Polynomial {
             coefficients.push(m.coefficient);
         }
         return coefficients;
+    }
+
+    isZero() {
+        return this.elements.length == 0;
     }
 
     static reduce(elements) {

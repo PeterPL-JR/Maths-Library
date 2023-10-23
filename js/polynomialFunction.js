@@ -20,8 +20,41 @@ class PolynomialFunction extends MFunction {
         return true;
     }
 
-    // TODO
     getZero() {
+        if(this.degree() == 1) return new LinearFunction(...this.polynomial.coefficients()).getZero();
+        if(this.degree() == 2) return new QuadraticFunction(...this.polynomial.coefficients()).getZero();
+
+        let polynomial = this.polynomial.copy();
+        let zero = [];
+        let options = [];
+
+        let lastDegree = polynomial.elements[polynomial.elements.length - 1].degree();
+        if(lastDegree != 0) {
+            zero.push(0);
+            polynomial = Polynomial.divide(polynomial, new Polynomial([new Monomial(1, [new Variable("x", lastDegree)])]));
+        }
+
+        let cFirst = polynomial.elements[0].coefficient;
+        let cLast = polynomial.elements[polynomial.elements.length - 1].coefficient;
+
+        for(let i = 1; i <= cFirst; i++) {
+            if(cFirst % i != 0) continue;
+            for(let j = 1; j <= cLast; j++) {
+                if(cLast % j != 0) continue;
+
+                let n = j / i;
+                if(options.indexOf(n) == -1) options.push(n, -n);
+            }
+        }
+        
+        for(let p of options) {
+            let result = Polynomial.divide(polynomial, new LinearFunction(1, -p).polynomial);
+            if(result) {
+                polynomial = result;
+                zero.push(p);
+            }
+        }
+        return zero.sort();
     }
 
     degree() {

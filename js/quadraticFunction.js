@@ -22,7 +22,7 @@ class QuadraticFunction extends PolynomialFunction {
         if(this.getDelta() > 0) {
             let x1 = (-this.b - Math.sqrt(this.getDelta())) / (2 * this.a);
             let x2 = (-this.b + Math.sqrt(this.getDelta())) / (2 * this.a);
-            return [x1, x2];
+            return [x1, x2].sort();
         } 
         else if(this.getDelta() == 0) {
             return this.getVertex().p;
