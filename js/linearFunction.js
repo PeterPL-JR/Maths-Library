@@ -10,4 +10,12 @@ class LinearFunction extends PolynomialFunction {
     getZero() {
         return -this.b / this.a;
     }
+
+    generalForm() {
+        let A = this.a;
+        let B = -1;
+        let C = this.b;
+        
+        return {A, B, C};
+    }
 }
