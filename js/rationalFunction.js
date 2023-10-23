@@ -14,6 +14,9 @@ class RationalFunction extends MFunction {
     }
 
     getZero() {
-        return this.P.getZero();
+        let zeroP = this.P.getZero();
+        let zeroQ = this.Q.getZero();
+
+        return zeroP.filter((z) => !zeroQ.includes(z));
     }
 }
