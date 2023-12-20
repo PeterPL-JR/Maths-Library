@@ -34,8 +34,8 @@ class PolynomialFunction extends MFunction {
             polynomial = Polynomial.divide(polynomial, new Polynomial([new Monomial(1, [new Variable("x", lastDegree)])]));
         }
 
-        let cFirst = polynomial.elements[0].coefficient;
-        let cLast = polynomial.elements[polynomial.elements.length - 1].coefficient;
+        let cFirst = Math.abs(polynomial.elements[0].coefficient);
+        let cLast = Math.abs(polynomial.elements[polynomial.elements.length - 1].coefficient);
 
         for(let i = 1; i <= cFirst; i++) {
             if(cFirst % i != 0) continue;
