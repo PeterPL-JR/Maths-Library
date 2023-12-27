@@ -12,6 +12,7 @@ class MFunction {
     }
 
     isInDomain(x) {
+        return true;
     }
 
     getZero() {
