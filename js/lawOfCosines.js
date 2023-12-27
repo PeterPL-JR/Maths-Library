@@ -2,7 +2,7 @@ class LawOfCosines {
     static a(b, c, cos) {
         let aq = 1;
         let bq = -2 * b * cos;
-        let cq = b*b - c*c
+        let cq = b*b - c*c;
 
         let [a1, a2] = new QuadraticFunction(aq, bq, cq).getZero();
 

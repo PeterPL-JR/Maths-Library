@@ -27,7 +27,7 @@ class Triangle extends Polygon {
     height() {
         let height = function(triangle, side) {
             return (2 * triangle.area()) / triangle[side];
-        }
+        };
         return {
             a: height(this, "a"),
             b: height(this, "b"),

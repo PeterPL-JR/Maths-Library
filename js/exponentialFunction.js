@@ -15,4 +15,15 @@ class ExponentialFunction extends MFunction {
 
     getZero() {
     }
+
+    getDerivative() {
+        let a = this.a;
+        
+        return new MFunction(function(x) {
+            return new ExponentialFunction(a).get(x) * new LogarithmicFunction(Math.E).get(a);
+        });
+    }
+    
+    getIntegral() {
+    }
 }

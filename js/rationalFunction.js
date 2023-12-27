@@ -19,4 +19,20 @@ class RationalFunction extends MFunction {
 
         return zeroP.filter((z) => !zeroQ.includes(z));
     }
+
+    getDerivative() {
+        let Pd = new Derivative(this.P).mfunction.polynomial;
+        let Qd = new Derivative(this.Q).mfunction.polynomial;
+
+        let P = this.P.polynomial;
+        let Q = this.Q.polynomial;
+
+        let f1 = Polynomial.difference(Polynomial.multiply(Pd, Q), Polynomial.multiply(P, Qd));
+        let f2 = Polynomial.multiply(Q, Q);
+
+        return new RationalFunction(f1.coefficients(), f2.coefficients());
+    }
+    
+    getIntegral() {
+    }
 }

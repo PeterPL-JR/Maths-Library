@@ -60,4 +60,17 @@ class PolynomialFunction extends MFunction {
     degree() {
         return this.polynomial.degree();
     }
+
+    getDerivative() {
+        let elements = [];
+        for(let elem of this.polynomial.elements) {
+            let n = elem.coefficient * elem.degree();
+            let degree = elem.degree() - 1;
+            elements.push(new Monomial(n, [new Variable("x", degree)]));
+        }
+        return new PolynomialFunction(new Polynomial(elements).coefficients());
+    }
+
+    getIntegral() {
+    }
 }

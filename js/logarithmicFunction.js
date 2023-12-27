@@ -16,4 +16,15 @@ class LogarithmicFunction extends MFunction {
     getZero() {
         return 1;
     }
+
+    getDerivative() {
+        let a = this.a;
+
+        return new MFunction(function(x) {
+            return new LogarithmicFunction(a).get(Math.E) / x;
+        });
+    }
+    
+    getIntegral() {
+    }
 }

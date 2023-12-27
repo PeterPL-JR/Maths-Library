@@ -17,4 +17,10 @@ class MFunction {
 
     getZero() {
     }
+
+    getDerivative() {
+    }
+    
+    getIntegral() {
+    }
 }
