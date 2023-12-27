@@ -61,6 +61,13 @@ class PolynomialFunction extends MFunction {
         return this.polynomial.degree();
     }
 
+    static get(coefficients) {
+        if(coefficients.length == 2) return new LinearFunction(...coefficients);
+        if(coefficients.length == 3) return new QuadraticFunction(...coefficients);
+
+        return new PolynomialFunction(coefficients);
+    }
+
     getDerivative() {
         let elements = [];
         for(let elem of this.polynomial.elements) {
@@ -68,9 +75,16 @@ class PolynomialFunction extends MFunction {
             let degree = elem.degree() - 1;
             elements.push(new Monomial(n, [new Variable("x", degree)]));
         }
-        return new PolynomialFunction(new Polynomial(elements).coefficients());
+        return PolynomialFunction.get(new Polynomial(elements).coefficients());
     }
 
     getIntegral() {
+        let elements = [];
+        for(let elem of this.polynomial.elements) {
+            let degree = elem.degree() + 1;
+            let n = elem.coefficient / degree;
+            elements.push(new Monomial(n, [new Variable("x", degree)]));
+        }
+        return PolynomialFunction.get(new Polynomial(elements).coefficients());
     }
 }

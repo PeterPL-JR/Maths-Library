@@ -1,8 +1,8 @@
 class RationalFunction extends MFunction {
     constructor(coefficientsP, coefficientsQ) {
         super();
-        this.P = new PolynomialFunction(coefficientsP);
-        this.Q = new PolynomialFunction(coefficientsQ);
+        this.P = PolynomialFunction.get(coefficientsP);
+        this.Q = PolynomialFunction.get(coefficientsQ);
     }
 
     formula(x) {
@@ -34,5 +34,20 @@ class RationalFunction extends MFunction {
     }
     
     getIntegral() {
+        let P = this.P;
+        let Q = this.Q;
+
+        if(P.degree() == 0) {
+            if(Q.degree() == LinearFunction.DEGREE) {
+                let n = P.polynomial.coefficients()[0];
+            
+                let a = Q.a;
+                let b = Q.b;
+                
+                return new MFunction(function(x) {
+                    return n * (1 / a) * new LogN(Math.abs(a * x + b)).get();
+                });
+            }
+        }
     }
 }

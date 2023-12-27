@@ -21,10 +21,15 @@ class LogarithmicFunction extends MFunction {
         let a = this.a;
 
         return new MFunction(function(x) {
-            return new LogarithmicFunction(a).get(Math.E) / x;
+            return new Log(a, Math.E).get() / x;
         });
     }
     
     getIntegral() {
+        let a = this.a;
+
+        return new MFunction(function(x) {
+            return (x / new LogN(a).get()) * (new LogN(x).get() - 1);
+        });
     }
 }

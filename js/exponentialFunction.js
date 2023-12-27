@@ -20,10 +20,15 @@ class ExponentialFunction extends MFunction {
         let a = this.a;
         
         return new MFunction(function(x) {
-            return new ExponentialFunction(a).get(x) * new LogarithmicFunction(Math.E).get(a);
+            return Math.pow(a, x) * new LogN(a).get();
         });
     }
     
     getIntegral() {
+        let a = this.a;
+
+        return new MFunction(function(x) {
+            return Math.pow(a, x) / new LogN(a).get();
+        });
     }
 }
