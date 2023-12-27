@@ -66,8 +66,9 @@ class Polynomial {
 
     coefficients() {
         let coefficients = [];
-        for(let m of this.elements) {
-            coefficients.push(m.coefficient);
+        for(let i = this.degree(); i >= 0; i--) {
+            let elem = this.elements.find((e) => e.degree() == i);
+            coefficients.push(elem ? elem.coefficient : 0);
         }
         return coefficients;
     }

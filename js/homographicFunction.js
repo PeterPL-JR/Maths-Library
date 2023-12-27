@@ -1,7 +1,10 @@
 class HomographicFunction extends RationalFunction {
     constructor(a=0, b=0, c=0, d=0) {
         if(!(c != 0 && a * d - b * c != 0)) throw new Error("Function cannot be constant!");
-        super(new LinearFunction(a, b), new LinearFunction(c, d));
+        let P = new LinearFunction(a, b);
+        let Q = new LinearFunction(c, d);
+        
+        super(P.polynomial.coefficients(), Q.polynomial.coefficients());
 
         this.a = a;
         this.b = b;
