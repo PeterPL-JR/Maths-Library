@@ -1,1 +1,11 @@
+# JavaScript
 *.html
+
+# C++
+maths.cpp
+Debug/
+.vs/
+*.sln
+*.vcxproj
+*.filters
+*.user
